@@ -10,3 +10,12 @@ I intend to fill it with two types of information about MongoDB.
 This site will serve links to technical information and notes from my interactions with MongoDB technology.
  
 If you have questions, E-Mail me: dan@bot4.us
+
+== Features not done yet
+
+Install bootstrap
+
+Use these colors:
+  brown: #4C3A2C
+  green: #009100
+
