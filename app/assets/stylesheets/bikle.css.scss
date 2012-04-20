@@ -1,0 +1,20 @@
+.mongo_bg_brown {background-color: #4C3A2C;}
+.mongo_brown {color: #4C3A2C;}
+.mongo_bg_green {background-color: #009100;}
+.mongo_green {color: #009100;}
+.black {color: black; }
+.white {color: white; }
+.bg_white {background-color: white;}
+.bold {font-weight:bold;}
+.has_black_border {border: 1px solid black;}
+.has_green_border {border: 1px solid #009100;}
+.has_blue_border {border: 1px solid #0000FF;}
+.has_brown_border {border: 1px solid #4C3A2C;}
+.padding10 {padding: 10px;}
+.has_green_border_2px {border: 2px solid #009100;}
+
+a {
+  color: #009100;
+  &:visited {color: 009100;}
+  &:hover {color: black;background-color: white;}
+}
