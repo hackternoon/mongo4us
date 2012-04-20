@@ -22,7 +22,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href="#") mongo4.us
+          %a.brand_bikle(href="/") mongo4.us
 
     .container-fluid
 
@@ -31,14 +31,20 @@
           .well.sidebar-nav
             %ul.nav.nav-list
               %li.nav-header Interesting:
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
+              %li
+                %a(href="#{new_session_path('user')}") Sign In
+              %li
+                %a(href="#{new_registration_path('user')}") Sign Up
+              %li
+                %a(href="#{destroy_user_session_path}") Sign Out
+
         .span9
-          = yield
+          .has_brown_border.padding10= yield
     
       %footer
-        %p mongo4.us 2012
+        %p
+          %a(href='/')mongo4.us
+          2012
     /
       Javascripts
       \==================================================
