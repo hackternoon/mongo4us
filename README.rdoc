@@ -13,9 +13,37 @@ If you have questions, E-Mail me: dan@bot4.us
 
 == Features not done yet
 
-Install bootstrap
+Generate Home Controller so Devise has a root route:
+  rails g controller Home index
+  vi config/routes.rb
+
+Install Devise:
+  gem install devise
+  gem devise
+  bundle install
+  rails generate devise:install
+  vi config/environments/development.rb
+  vi config/environments/test.rb
+  vi config/environments/production.rb
+  rails generate devise User
+  vi migration
+  rake db:migrate
+  rails generate devise views
+
+Install bootstrap:
+  gem install twitter-bootstrap-rails
+  gem "twitter-bootstrap-rails"
+  bundle install
+  rails g bootstrap:layout application fluid
+  
+Eventually:
+  rails g bootstrap:themed links
 
 Use these colors:
   brown: #4C3A2C
   green: #009100
+
+
+
+Allow Users to create tagged links
 
