@@ -1,0 +1,24 @@
+%h1 Listing links
+
+%table
+  %tr
+    %th Href
+    %th Tag1
+    %th Tag2
+    %th Tag3
+    %th Link Author
+    %th 
+
+
+  - @links.each do |link|
+    %tr
+      %td= link.href
+      %td= link.tag1
+      %td= link.tag2
+      %td= link.tag3
+      %td= link.user.email
+      %td= link_to('Edit', edit_link_path(link)) if current_user.id == link.user_id
+
+%br
+
+= link_to 'New Link', new_link_path

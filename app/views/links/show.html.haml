@@ -1,0 +1,20 @@
+
+%p
+  %b Href:
+  = @link.href
+%p
+  %b Tag1:
+  = @link.tag1
+%p
+  %b Tag2:
+  = @link.tag2
+%p
+  %b Tag3:
+  = @link.tag3
+%p
+  %b Link Author:
+  = @link.user.email
+
+- if current_user.id == @link.user_id
+  = link_to 'Edit', edit_link_path(@link)
+

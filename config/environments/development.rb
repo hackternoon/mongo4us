@@ -37,5 +37,9 @@ Z320120417::Application.configure do
 
   # bikle
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # Tell Rails to :
+  config.serve_static_assets = true
+
 end
 

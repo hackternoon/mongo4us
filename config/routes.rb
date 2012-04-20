@@ -1,4 +1,6 @@
 Z320120417::Application.routes.draw do
+  resources :links
+
   devise_for :users
 
   get "home/index"

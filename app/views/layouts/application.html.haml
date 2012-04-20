@@ -22,7 +22,9 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand_bikle(href="/") mongo4.us
+          %a.brand_bikle(href="/")
+            mongo4
+            %span.mongo_brown .us
 
     .container-fluid
 
@@ -30,16 +32,26 @@
         .span3
           .well.sidebar-nav
             %ul.nav.nav-list
-              %li.nav-header Interesting:
+              %li
+                - if current_user.present?
+                  You are logged in as:
+                  %a(href="#{edit_user_password_path('user')}") 
+                    =current_user.email
+              %li.nav-header mongo4.us pages:
               %li
                 %a(href="#{new_session_path('user')}") Sign In
               %li
                 %a(href="#{new_registration_path('user')}") Sign Up
               %li
                 %a(href="#{destroy_user_session_path}") Sign Out
+              %li
+                %a(href="#{links_path}") User Submitted Links
+              %li.nav-header Links to other sites:
+              %li
+                %a(href="http://mongodb.org" target="m") mongoDB.org
 
         .span9
-          .has_brown_border.padding10= yield
+          .has_brown_border.padding10.has_mongo_bgc= yield
     
       %footer
         %p
