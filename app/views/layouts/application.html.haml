@@ -5,16 +5,20 @@
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
+    %link(rel="icon" href="/favicon.ico")/
   %body
     %a(href="/")
       %h1.bg_white
         %span.mongo_green.has_brown_border mongo4
         %span.black .
         %span.mongo_brown.has_green_border_2px us
-    %p.alert=alert
-    %p.notice=notice
-    .mongo_brown.bold.has_green_border.padding10=yield
-    %br/
-    .mongo_green.has_brown_border
-      %a(href="#{new_registration_path('user')}") Sign Up
+    .blocks_others.float_left.has_brown_border
+      .mongo_brown.bold.has_green_border.padding10.allows_others_inline.float_left.margin10
+        LHS links go here 
+      .mongo_brown.bold.has_green_border.padding10.blocks_others.float_left.margin10
+        %p.alert X=alert
+        %p.notice X=notice
+        =yield
+      .mongo_green
+        %a(href="#{new_registration_path('user')}") Sign Up
 
