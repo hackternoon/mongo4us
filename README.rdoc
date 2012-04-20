@@ -13,10 +13,6 @@ If you have questions, E-Mail me: dan@bot4.us
 
 == Features not done yet
 
-Generate Home Controller so Devise has a root route:
-  rails g controller Home index
-  vi config/routes.rb
-
 Install Devise:
   gem install devise
   gem devise

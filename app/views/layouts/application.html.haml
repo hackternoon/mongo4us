@@ -1,0 +1,20 @@
+!!! 5
+%html
+  %head
+    %title mongo4.us
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    %a(href="/")
+      %h1.bg_white
+        %span.mongo_green.has_brown_border mongo4
+        %span.black .
+        %span.mongo_brown.has_green_border_2px us
+    %p.alert=alert
+    %p.notice=notice
+    .mongo_brown.bold.has_green_border.padding10=yield
+    %br/
+    .mongo_green.has_brown_border
+      %a(href="#{new_registration_path('user')}") Sign Up
+
