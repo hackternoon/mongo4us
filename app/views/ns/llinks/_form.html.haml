@@ -1,0 +1,13 @@
+= form_for @ns_llink do |f|
+  -if @ns_llink.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@ns_llink.errors.count, "error")} prohibited this ns_llink from being saved:"
+      %ul
+        - @ns_llink.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :href
+    = f.text_field :href
+  .actions
+    = f.submit 'Save'

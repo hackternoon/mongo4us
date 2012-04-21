@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Href:
+  = @ns_llink.href
+
+= link_to 'Edit', edit_ns_llink_path(@ns_llink)
+\|
+= link_to 'Back', ns_llinks_path

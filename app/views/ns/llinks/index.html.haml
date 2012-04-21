@@ -1,0 +1,19 @@
+%h1 Listing ns_llinks
+
+%table
+  %tr
+    %th Href
+    %th
+    %th
+    %th
+
+  - @ns_llinks.each do |ns_llink|
+    %tr
+      %td= ns_llink.href
+      %td= link_to 'Show', ns_llink
+      %td= link_to 'Edit', edit_ns_llink_path(ns_llink)
+      %td= link_to 'Destroy', ns_llink, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Llink', new_ns_llink_path

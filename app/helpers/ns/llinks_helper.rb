@@ -1,0 +1,2 @@
+module Ns::LlinksHelper
+end

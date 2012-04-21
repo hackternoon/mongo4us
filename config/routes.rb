@@ -1,4 +1,6 @@
 Z320120417::Application.routes.draw do
+  namespace :ns do resources :llinks end
+
   resources :links
 
   devise_for :users
