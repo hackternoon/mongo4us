@@ -1,0 +1,3 @@
+class Link < ActiveRecord::Base
+  attr_accessible :href, :tag1, :tag2, :tag3, :user_id
+end

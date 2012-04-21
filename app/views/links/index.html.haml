@@ -1,0 +1,27 @@
+%h1 Listing links
+
+%table
+  %tr
+    %th Href
+    %th Tag1
+    %th Tag2
+    %th Tag3
+    %th User
+    %th
+    %th
+    %th
+
+  - @links.each do |link|
+    %tr
+      %td= link.href
+      %td= link.tag1
+      %td= link.tag2
+      %td= link.tag3
+      %td= link.user_id
+      %td= link_to 'Show', link
+      %td= link_to 'Edit', edit_link_path(link)
+      %td= link_to 'Destroy', link, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Link', new_link_path
