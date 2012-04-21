@@ -7,18 +7,28 @@
     = csrf_meta_tags
     %link(rel="icon" href="/favicon.ico")/
   %body
-    %a(href="/")
-      %h1.bg_white
-        %span.mongo_green.has_brown_border mongo4
-        %span.black .
-        %span.mongo_brown.has_green_border_2px us
-    .blocks_others.float_left.has_brown_border
-      .mongo_brown.bold.has_green_border.padding10.allows_others_inline.float_left.margin10
-        LHS links go here 
-      .mongo_brown.bold.has_green_border.padding10.blocks_others.float_left.margin10
-        %p.alert X=alert
-        %p.notice X=notice
-        =yield
-      .mongo_green
-        %a(href="#{new_registration_path('user')}") Sign Up
+    %table
+      %tr
+        %td(colspan="2")
+          %header
+            %a(href="/")
+              %h1.bg_white
+                %span.mongo_green.has_brown_border mongo4
+                %span.black .
+                %span.mongo_brown.has_green_border_2px us
+      %tr
+        %td.vertical_align_top
+          %nav.mongo_brown.bold.has_green_border.padding10.float_left.margin10
+            %a(href="#{new_registration_path('user')}") Sign Up
+        %td
+          %article.mongo_brown.bold.has_green_border.padding10.float_left.margin10.mongo_bgc
+            -if alert.present?
+              %p.alert =alert
+            -if notice.present?
+              %p.notice =notice
+            =yield
+      %tr
+        %td.has_brown_border(colspan="2")
+          %footer.mongo_green
+            %a(href="/") mongo4.us 2012
 
