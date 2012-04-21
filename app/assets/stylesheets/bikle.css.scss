@@ -3,11 +3,19 @@
 .mongo_bgc {background-color: #F3F4EB;}
 .bg_white {background-color: white;}
 .bold {font-weight:bold;}
+.has_black_border     {border: 1px solid black;}
 .has_brown_border     {border: 1px solid #4C3A2C;}
 .has_green_border     {border: 1px solid #009100;}
 .has_green_border_2px {border: 2px solid #009100;}
 .padding10 {padding: 10px;}
 .margin10  {margin:  10px;}
+.width200 {width:  200px;}
+.allows_others_inline {display: inline;}
+.blocks_others {display: block;}
+.float_left {float:left;}
+.vertical_align_top {vertical-align: top;}
+p.alert {color: #880000; background-color: #F3F4EB; font-size: 20px; font-weight:bold;}
+p.notice {color: black; background-color: #F3F4EB; font-size: 20px; font-weight:bold;}
 
 a {
   color: #009100;
@@ -15,11 +23,10 @@ a {
   &:hover {color: black;background-color: white;}
 }
 
-.allows_others_inline {display: inline;}
-
-.blocks_others {display: block;}
-
-.float_left {float:left;}
-
-.vertical_align_bottom {vertical-align: bottom;}
-.vertical_align_top {vertical-align: top;}
+nav>a {
+  display: block;
+  color: #009100;
+  margin: 10px;
+  &:visited {color: 009100;}
+  &:hover {color: black;background-color: white;}
+}
