@@ -1,35 +1,17 @@
 class LinksController < ApplicationController
   # GET /links
-  # GET /links.json
   def index
     @links = Link.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @links }
-    end
   end
 
   # GET /links/1
-  # GET /links/1.json
   def show
     @link = Link.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @link }
-    end
   end
 
   # GET /links/new
-  # GET /links/new.json
   def new
     @link = Link.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @link }
-    end
   end
 
   # GET /links/1/edit
@@ -38,40 +20,39 @@ class LinksController < ApplicationController
   end
 
   # POST /links
-  # POST /links.json
   def create
+    if current_user.blank? or current_user.id.blank?
+      redirect_to links_path
+      return
+    end
     @link = Link.new(params[:link])
-    debugger
     @link.user_id = current_user.id
     @link.save
     redirect_to links_path
-  end
+  end # def create
 
   # PUT /links/1
-  # PUT /links/1.json
   def update
-    @link = Link.find(params[:id])
-
-    respond_to do |format|
-      if @link.update_attributes(params[:link])
-        format.html { redirect_to @link, notice: 'Link was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @link.errors, status: :unprocessable_entity }
-      end
+    if current_user.blank? or current_user.id.blank?
+      redirect_to links_path
+      return
     end
-  end
+    @link = Link.find(params[:id])
+    if @link.update_attributes(params[:link])
+      redirect_to links_path, notice: 'Link successfully updated.'
+    else
+      redirect_to links_path, notice: 'Website Malfunction, Link update failed. Its not your fault.'
+    end
+  end # def update
 
   # DELETE /links/1
-  # DELETE /links/1.json
   def destroy
+    if current_user.blank? or current_user.id.blank? or link.user_id != current_user.id
+      redirect_to links_path
+      return
+    end
     @link = Link.find(params[:id])
     @link.destroy
-
-    respond_to do |format|
-      format.html { redirect_to links_url }
-      format.json { head :no_content }
-    end
-  end
+    redirect_to links_path
+  end # def destroy
 end

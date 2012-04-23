@@ -1,4 +1,4 @@
-%h1 Listing links
+%h1 Our links
 
 %table
   %tr
@@ -8,8 +8,6 @@
     %th Tag3
     %th User
     %th
-    %th
-    %th
 
   - @links.each do |link|
     %tr
@@ -17,11 +15,12 @@
       %td= link.tag1
       %td= link.tag2
       %td= link.tag3
-      %td= link.user_id
-      %td= link_to 'Show', link
-      %td= link_to 'Edit', edit_link_path(link)
-      %td= link_to 'Destroy', link, :confirm => 'Are you sure?', :method => :delete
+      %td= link.user.email
+      %td
+        - if (current_user.present? and current_user.id.present? and link.user_id == current_user.id)
+          = link_to 'Edit', edit_link_path(link)
 
 %br
 
-= link_to 'New Link', new_link_path
+= link_to('New Link', new_link_path) if (current_user.present? and current_user.id.present?)
+
