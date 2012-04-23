@@ -23,7 +23,8 @@
         %td.vertical_align_top.width200
           - if current_user.present?
             You are logged in as:
-            %a(href="#{sslhost}#{edit_user_password_path('user')}")=current_user.email
+            %a(href="#{sslhost}#{edit_user_password_path('user')}")
+              =truncate(current_user.email, :length => 15)
           - else
             You are logged in as: 
             %span.mongo_brown.bold Guest

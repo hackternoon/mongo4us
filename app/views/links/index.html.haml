@@ -15,7 +15,8 @@
       %td
         - if (current_user.present? and current_user.id.present? and link.user_id == current_user.id)
           = link_to 'Edit', edit_link_path(link)
-      %td= link.href
+      %td
+        %a(href='#{link.href}' target='l') #{truncate(link.href, :length => 44)}
       %td= link.tag1
       %td= link.tag2
       %td= link.tag3
