@@ -11,7 +11,7 @@
       %tr
         %td
           %header
-            %a(href="/")
+            %a(href="#{sslhost}/")
               %h1.bg_white
                 %span.mongo_green.has_brown_border mongo4
                 %span.black .
@@ -26,17 +26,17 @@
         %td.vertical_align_top.width200
           - if current_user.present?
             You are logged in as:
-            %a(href="#{edit_user_password_path('user')}")=current_user.email
+            %a(href="#{sslhost}#{edit_user_password_path('user')}")=current_user.email
           - else
             You are logged in as: 
             %span.mongo_brown.bold Guest
             %hr/
 
           %nav.mongo_brown.bold.has_green_border.padding10.float_left.margin10.blocks_others
-            %a(href="#{new_session_path('user')}") Sign In
-            %a(href="#{new_registration_path('user')}") Sign Up
-            %a(href="#{destroy_user_session_path}") Sign Out
-            %a(href="#{links_path}") Our Links
+            %a(href="#{sslhost}#{new_session_path('user')}") Sign In
+            %a(href="#{sslhost}#{new_registration_path('user')}") Sign Up
+            %a(href="#{sslhost}#{destroy_user_session_path}") Sign Out
+            %a(href="#{sslhost}#{links_path}") Our Links
 
           %nav.mongo_brown.bold.has_green_border.padding10.float_left.margin10.blocks_others
             %p Dan's Links:
@@ -48,6 +48,6 @@
       %tr
         %td.has_brown_border(colspan="2")
           %footer
-            %a.mongo_green(href="/") mongo4.us 
+            %a.mongo_green(href="#{sslhost}/") mongo4.us 
             %span.black 2012
 
