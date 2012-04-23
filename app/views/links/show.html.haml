@@ -16,4 +16,7 @@
   = @link.user_id
 
 = link_to 'Edit', edit_link_path(@link)
+%br/
+%br/
+= link_to 'Delete This Link From Our Website... now', link, :confirm => 'Are you sure?', :method => :delete
 

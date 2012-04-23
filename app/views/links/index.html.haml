@@ -2,24 +2,24 @@
 
 %table
   %tr
+    %th Edit?
     %th Href
     %th Tag1
     %th Tag2
     %th Tag3
     %th User
-    %th
+
 
   - @links.each do |link|
     %tr
+      %td
+        - if (current_user.present? and current_user.id.present? and link.user_id == current_user.id)
+          = link_to 'Edit', edit_link_path(link)
       %td= link.href
       %td= link.tag1
       %td= link.tag2
       %td= link.tag3
       %td= link.user.email
-      %td
-        - if (current_user.present? and current_user.id.present? and link.user_id == current_user.id)
-          = link_to 'Edit', edit_link_path(link)
-
 %br
 
 = link_to('New Link', new_link_path) if (current_user.present? and current_user.id.present?)

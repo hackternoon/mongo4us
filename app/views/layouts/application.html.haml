@@ -27,6 +27,10 @@
           - if current_user.present?
             You are logged in as:
             %a(href="#{edit_user_password_path('user')}")=current_user.email
+          - else
+            You are not logged in. 
+            %br/
+            That's kewl.
             %hr/
 
           %nav.mongo_brown.bold.has_green_border.padding10.float_left.margin10.blocks_others

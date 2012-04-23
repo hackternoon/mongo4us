@@ -1,5 +1,10 @@
 %h1 Editing link
 
 = render 'form'
+%br/
 
+I don't want to edit this link.
+I want to DELETE it: 
+%br/
+= link_to 'Delete This Link From Our Website... now', @link, :confirm => 'Are you sure?', :method => :delete
 

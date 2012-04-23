@@ -47,12 +47,12 @@ class LinksController < ApplicationController
 
   # DELETE /links/1
   def destroy
-    if current_user.blank? or current_user.id.blank? or link.user_id != current_user.id
-      redirect_to links_path
+    if current_user.blank? or current_user.id.blank?
+      redirect_to links_path, notice: 'Website Malfunction, Link DELETE failed. Its not your fault.'
       return
     end
     @link = Link.find(params[:id])
-    @link.destroy
-    redirect_to links_path
+    @link.destroy if @link.user_id == current_user.id
+    redirect_to links_path, notice: 'That link... , should be GONE.'
   end # def destroy
 end
