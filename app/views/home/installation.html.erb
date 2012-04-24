@@ -491,4 +491,282 @@ Tue Apr 24 15:42 /dan/mongo bikle611$
 Tue Apr 24 15:42 /dan/mongo bikle611$ 
 
 
-Then, 
+Then, the boost documentation I compile a simple C++ file:
+
+
+Tue Apr 24 15:46 /dan/mongo bikle611$ 
+Tue Apr 24 15:46 /dan/mongo bikle611$ cat example.cpp 
+#include <boost/lambda/lambda.hpp>
+#include <iostream>
+#include <iterator>
+#include <algorithm>
+
+int main()
+{
+    using namespace boost::lambda;
+    typedef std::istream_iterator<int> in;
+
+    std::for_each(
+        in(std::cin), in(), std::cout << (_1 * 3) << " " );
+}
+Tue Apr 24 15:47 /dan/mongo bikle611$ 
+Tue Apr 24 15:47 /dan/mongo bikle611$ 
+Tue Apr 24 15:47 /dan/mongo bikle611$ 
+
+
+Tue Apr 24 15:47 /dan/mongo bikle611$ 
+Tue Apr 24 15:47 /dan/mongo bikle611$ which c++
+/Developer/usr/bin/c++
+Tue Apr 24 15:48 /dan/mongo bikle611$ 
+Tue Apr 24 15:48 /dan/mongo bikle611$ 
+Tue Apr 24 15:49 /dan/mongo bikle611$ c++ -I /dan/mongo/boost_1_49_0 example.cpp -o example
+Tue Apr 24 15:49 /dan/mongo bikle611$ 
+Tue Apr 24 15:49 /dan/mongo bikle611$ 
+
+Then, I ran it:
+
+
+Tue Apr 24 15:49 /dan/mongo bikle611$ 
+Tue Apr 24 15:50 /dan/mongo bikle611$ 
+Tue Apr 24 15:50 /dan/mongo bikle611$ echo 1 2 3 | ./example
+3 6 9 Tue Apr 24 15:50 /dan/mongo bikle611$ 
+Tue Apr 24 15:50 /dan/mongo bikle611$ 
+Tue Apr 24 15:50 /dan/mongo bikle611$ 
+
+Then I followed more instructions from the documentation:
+
+Tue Apr 24 15:53 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 15:53 /dan/mongo/boost_1_49_0 bikle611$ ./bootstrap.sh --help
+`./bootstrap.sh' prepares Boost for building on a few kinds of systems.
+
+Usage: ./bootstrap.sh [OPTION]... 
+
+Defaults for the options are specified in brackets.
+
+Configuration:
+  -h, --help                display this help and exit
+  --with-bjam=BJAM          use existing Boost.Jam executable (bjam)
+                            [automatically built]
+  --with-toolset=TOOLSET    use specific Boost.Build toolset
+                            [automatically detected]
+  --show-libraries          show the set of libraries that require build
+                            and installation steps (i.e., those libraries
+                            that can be used with --with-libraries or
+                            --without-libraries), then exit
+  --with-libraries=list     build only a particular set of libraries,
+                            describing using either a comma-separated list of
+                            library names or "all"
+                            [all]
+  --without-libraries=list  build all libraries except the ones listed []
+  --with-icu                enable Unicode/ICU support in Regex 
+                            [automatically detected]
+  --without-icu             disable Unicode/ICU support in Regex
+  --with-icu=DIR            specify the root of the ICU library installation
+                            and enable Unicode/ICU support in Regex
+                            [automatically detected]
+  --with-python=PYTHON      specify the Python executable [python]
+  --with-python-root=DIR    specify the root of the Python installation
+                            [automatically detected]
+  --with-python-version=X.Y specify the Python version as X.Y
+                            [automatically detected]
+
+Installation directories:
+  --prefix=PREFIX           install Boost into the given PREFIX
+                            [/usr/local]
+  --exec-prefix=EPREFIX     install Boost binaries into the given EPREFIX
+                            [PREFIX]
+
+More precise control over installation directories:
+  --libdir=DIR              install libraries here [EPREFIX/lib]
+  --includedir=DIR          install headers here [PREFIX/include]
+
+Tue Apr 24 15:53 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 15:53 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 15:53 /dan/mongo/boost_1_49_0 bikle611$ 
+
+
+The option '--with-libraries=list' interested me.
+
+I asked bootstrap.sh for a list of libraries:
+
+
+Tue Apr 24 15:53 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 15:55 /dan/mongo/boost_1_49_0 bikle611$ ./bootstrap.sh --show-libraries
+-n Building Boost.Build engine with toolset darwin... 
+tools/build/v2/engine/bin.macosxx86/b2
+
+The following Boost libraries have portions that require a separate build
+and installation step. Any library not listed here can be used by including
+the headers only.
+
+The Boost libraries requiring separate building and installation are:
+    - chrono
+    - date_time
+    - exception
+    - filesystem
+    - graph
+    - graph_parallel
+    - iostreams
+    - locale
+    - math
+    - mpi
+    - program_options
+    - python
+    - random
+    - regex
+    - serialization
+    - signals
+    - system
+    - test
+    - thread
+    - timer
+    - wave
+Tue Apr 24 15:56 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 15:56 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 15:56 /dan/mongo/boost_1_49_0 bikle611$ 
+
+
+
+MongoDB wants the filesystem library so I fed 'filesystem' to bootstrap.sh:
+
+Tue Apr 24 16:04 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 16:04 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 16:04 /dan/mongo/boost_1_49_0 bikle611$ ./bootstrap.sh --with-libraries=filesystem --prefix=/dan/mongo
+-n Building Boost.Build engine with toolset darwin... 
+tools/build/v2/engine/bin.macosxx86/b2
+-n Unicode/ICU support for Boost.Regex?... 
+not found.
+Generating Boost.Build configuration in project-config.jam...
+
+Bootstrapping is done. To build, run:
+
+    ./b2
+    
+To adjust configuration, edit 'project-config.jam'.
+Further information:
+
+   - Command line help:
+     ./b2 --help
+     
+   - Getting started guide: 
+     http://www.boost.org/more/getting_started/unix-variants.html
+     
+   - Boost.Build documentation:
+     http://www.boost.org/boost-build2/doc/html/index.html
+
+Tue Apr 24 16:04 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 16:04 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 16:04 /dan/mongo/boost_1_49_0 bikle611$ 
+
+
+
+Tue Apr 24 16:07 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 16:07 /dan/mongo/boost_1_49_0 bikle611$ ll b2*
+-rwxr-xr-x  1 bikle611  admin  173148 Apr 24 16:04 b2*
+Tue Apr 24 16:07 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 16:07 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 16:07 /dan/mongo/boost_1_49_0 bikle611$ ./b2 install
+
+Component configuration:
+
+    - chrono                   : not building
+    - date_time                : not building
+    - exception                : not building
+    - filesystem               : building
+    - graph                    : not building
+    - graph_parallel           : not building
+    - iostreams                : not building
+    - locale                   : not building
+    - math                     : not building
+    - mpi                      : not building
+    - program_options          : not building
+    - python                   : not building
+    - random                   : not building
+
+snip ...
+
+
+darwin.compile.c++ bin.v2/libs/filesystem/build/darwin-4.0.1/release/threading-multi/v3/src/operations.o
+darwin.compile.c++ bin.v2/libs/filesystem/build/darwin-4.0.1/release/threading-multi/v3/src/path.o
+darwin.compile.c++ bin.v2/libs/filesystem/build/darwin-4.0.1/release/threading-multi/v3/src/portability.o
+darwin.compile.c++ bin.v2/libs/filesystem/build/darwin-4.0.1/release/threading-multi/v3/src/windows_file_codecvt.o
+darwin.compile.c++ bin.v2/libs/filesystem/build/darwin-4.0.1/release/threading-multi/v3/src/codecvt_error_category.o
+darwin.compile.c++ bin.v2/libs/filesystem/build/darwin-4.0.1/release/threading-multi/v3/src/path_traits.o
+darwin.compile.c++ bin.v2/libs/filesystem/build/darwin-4.0.1/release/threading-multi/v3/src/unique_path.o
+darwin.compile.c++ bin.v2/libs/filesystem/build/darwin-4.0.1/release/threading-multi/v3/src/utf8_codecvt_facet.o
+darwin.link.dll bin.v2/libs/filesystem/build/darwin-4.0.1/release/threading-multi/libboost_filesystem.dylib
+common.copy /dan/mongo/lib/libboost_filesystem.dylib
+...updated 9814 targets...
+Tue Apr 24 16:13 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 16:13 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 16:13 /dan/mongo/boost_1_49_0 bikle611$ 
+
+
+
+I looked for any new directories in /dan/mongo/
+
+
+Tue Apr 24 16:13 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 16:13 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 16:16 /dan/mongo/boost_1_49_0 bikle611$ cd /dan/mongo/
+Tue Apr 24 16:16 /dan/mongo bikle611$ 
+Tue Apr 24 16:16 /dan/mongo bikle611$ ls -latr
+total 121384
+-rw-r--r--   1 bikle611  admin  59136116 Feb 24 03:57 boost_1_49_0.tar.gz
+-rw-r--r--   1 bikle611  admin   2966431 Mar 19 20:44 mongodb-src-r2.0.4.tar.gz
+drwxr-xr-x  39 bikle611  admin      1326 Apr 24 14:25 mongodb-src-r2.0.4/
+drwxr-xr-x   5 bikle611  admin       170 Apr 24 14:40 ../
+-rw-r--r--   1 bikle611  admin       270 Apr 24 15:46 example.cpp
+-rwxr-xr-x   1 bikle611  admin     34364 Apr 24 15:49 example*
+drwxr-xr-x  25 bikle611  admin       850 Apr 24 16:07 boost_1_49_0/
+drwxr-xr-x   3 bikle611  admin       102 Apr 24 16:10 include/
+drwxr-xr-x  10 bikle611  admin       340 Apr 24 16:13 ./
+drwxr-xr-x   6 bikle611  admin       204 Apr 24 16:13 lib/
+Tue Apr 24 16:16 /dan/mongo bikle611$ 
+Tue Apr 24 16:16 /dan/mongo bikle611$ 
+Tue Apr 24 16:16 /dan/mongo bikle611$ 
+
+
+Tue Apr 24 16:16 /dan/mongo bikle611$ 
+Tue Apr 24 16:16 /dan/mongo bikle611$ ll include lib
+include:
+total 0
+drwxr-xr-x    3 bikle611  admin   102 Apr 24 16:10 ./
+drwxr-xr-x   10 bikle611  admin   340 Apr 24 16:13 ../
+drwxr-xr-x  208 bikle611  admin  7072 Apr 24 16:13 boost/
+
+lib:
+total 3368
+drwxr-xr-x   6 bikle611  admin      204 Apr 24 16:13 ./
+drwxr-xr-x  10 bikle611  admin      340 Apr 24 16:13 ../
+-rw-r--r--   1 bikle611  admin  1413292 Apr 24 16:13 libboost_filesystem.a
+-rwxr-xr-x   1 bikle611  admin   193704 Apr 24 16:13 libboost_filesystem.dylib*
+-rw-r--r--   1 bikle611  admin    74304 Apr 24 16:13 libboost_system.a
+-rwxr-xr-x   1 bikle611  admin    29884 Apr 24 16:13 libboost_system.dylib*
+Tue Apr 24 16:17 /dan/mongo bikle611$ 
+Tue Apr 24 16:17 /dan/mongo bikle611$ 
+
+
+
+Next, I tried scons againg to install MongoDB.
+
+
+Tue Apr 24 16:19 /dan/mongo/mongodb-src-r2.0.4 bikle611$ 
+Tue Apr 24 16:19 /dan/mongo/mongodb-src-r2.0.4 bikle611$ scons .
+scons: Reading SConscript files ...
+scons version: 2.1.0
+python version: 2 6 2 'final' 0
+Checking whether the C++ compiler worksyes
+Checking for C library stdc++... yes
+Checking for C++ header file boost/filesystem/operations.hpp... no
+can't find boost headers
+Tue Apr 24 16:19 /dan/mongo/mongodb-src-r2.0.4 bikle611$ 
+Tue Apr 24 16:20 /dan/mongo/mongodb-src-r2.0.4 bikle611$ 
+
+Darn, scons does not see my new install of boost libraries.
+
+How do I tell scons that my boost libraries are here:
+
+/dan/mongo/boost_1_49_0/
+
+??
