@@ -390,5 +390,105 @@ Tue Apr 24 14:57 /dan/mongo/mongodb-src-r2.0.4 bikle611$
 
 Darn!
 
-It looks I might need to install homebrew on this MBP.
+Okay, I looked for boost via google.
 
+Google sent me to this site:
+
+http://boost.org
+
+I downloaded it:
+
+
+Tue Apr 24 15:13 /dan/mongo bikle611$ wget http://sourceforge.net/projects/boost/files/boost/1.49.0/boost_1_49_0.tar.gz/download
+--2012-04-24 15:13:51--  http://sourceforge.net/projects/boost/files/boost/1.49.0/boost_1_49_0.tar.gz/download
+Resolving sourceforge.net... 216.34.181.60
+Connecting to sourceforge.net|216.34.181.60|:80... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: http://downloads.sourceforge.net/project/boost/boost/1.49.0/boost_1_49_0.tar.gz?r=&ts=1335305628&use_mirror=softlayer [following]
+--2012-04-24 15:13:52--  http://downloads.sourceforge.net/project/boost/boost/1.49.0/boost_1_49_0.tar.gz?r=&ts=1335305628&use_mirror=softlayer
+Resolving downloads.sourceforge.net... 216.34.181.59
+Connecting to downloads.sourceforge.net|216.34.181.59|:80... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: http://softlayer.dl.sourceforge.net/project/boost/boost/1.49.0/boost_1_49_0.tar.gz [following]
+--2012-04-24 15:13:54--  http://softlayer.dl.sourceforge.net/project/boost/boost/1.49.0/boost_1_49_0.tar.gz
+Resolving softlayer.dl.sourceforge.net... 74.86.229.28
+Connecting to softlayer.dl.sourceforge.net|74.86.229.28|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 59136116 (56M) [application/x-gzip]
+Saving to: `boost_1_49_0.tar.gz'
+
+100%[======================================>] 59,136,116   163K/s   in 9m 58s  
+
+2012-04-24 15:23:53 (96.6 KB/s) - `boost_1_49_0.tar.gz' saved [59136116/59136116]
+
+Tue Apr 24 15:23 /dan/mongo bikle611$ 
+Tue Apr 24 15:25 /dan/mongo bikle611$ 
+Tue Apr 24 15:25 /dan/mongo bikle611$ 
+Tue Apr 24 15:25 /dan/mongo bikle611$ 
+
+That was a 59M download, kind of large for uncompiled software.
+
+I looked at it:
+
+
+Tue Apr 24 15:30 /dan/mongo bikle611$ 
+Tue Apr 24 15:30 /dan/mongo bikle611$ 
+Tue Apr 24 15:30 /dan/mongo bikle611$ tar zxf boost_1_49_0.tar.gz 
+Tue Apr 24 15:31 /dan/mongo bikle611$ ll
+total 121304
+drwxr-xr-x   6 bikle611  admin       204 Apr 24 15:31 ./
+drwxr-xr-x   5 bikle611  admin       170 Apr 24 14:40 ../
+drwxr-xr-x  20 bikle611  admin       680 Feb 22 15:06 boost_1_49_0/
+-rw-r--r--   1 bikle611  admin  59136116 Feb 24 03:57 boost_1_49_0.tar.gz
+drwxr-xr-x  39 bikle611  admin      1326 Apr 24 14:25 mongodb-src-r2.0.4/
+-rw-r--r--   1 bikle611  admin   2966431 Mar 19 20:44 mongodb-src-r2.0.4.tar.gz
+Tue Apr 24 15:32 /dan/mongo bikle611$ 
+Tue Apr 24 15:32 /dan/mongo bikle611$ cd boost_1_49_0
+Tue Apr 24 15:32 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 15:32 /dan/mongo/boost_1_49_0 bikle611$ ll
+total 176
+drwxr-xr-x   20 bikle611  admin    680 Feb 22 15:06 ./
+drwxr-xr-x    6 bikle611  admin    204 Apr 24 15:31 ../
+-rw-r--r--    1 bikle611  admin    291 Jan 30 18:30 INSTALL
+-rw-r--r--    1 bikle611  admin  10160 Jan 29 13:58 Jamroot
+-rw-r--r--    1 bikle611  admin   1338 Jan 30 18:30 LICENSE_1_0.txt
+drwxr-xr-x  208 bikle611  admin   7072 Feb 22 15:07 boost/
+-rw-r--r--    1 bikle611  admin    849 Jan 30 18:30 boost-build.jam
+-rw-r--r--    1 bikle611  admin    989 Jan 30 18:30 boost.css
+-rw-r--r--    1 bikle611  admin   6308 Jan 30 18:30 boost.png
+-rw-r--r--    1 bikle611  admin  18031 Jan 30 18:30 boostcpp.jam
+-rw-r--r--    1 bikle611  admin   2545 Jan 30 18:30 bootstrap.bat
+-rwxr-xr-x    1 bikle611  admin  10324 Jan 30 18:30 bootstrap.sh*
+drwxr-xr-x    8 bikle611  admin    272 Feb 22 15:05 doc/
+-rw-r--r--    1 bikle611  admin    769 Jan 30 18:30 index.htm
+-rw-r--r--    1 bikle611  admin   5437 Jan 29 13:58 index.html
+drwxr-xr-x  101 bikle611  admin   3434 Feb 22 15:06 libs/
+drwxr-xr-x    8 bikle611  admin    272 Feb 22 15:10 more/
+-rw-r--r--    1 bikle611  admin   2608 Jan 30 18:30 rst.css
+drwxr-xr-x    6 bikle611  admin    204 Feb 22 15:06 status/
+drwxr-xr-x   15 bikle611  admin    510 Feb 22 15:10 tools/
+Tue Apr 24 15:32 /dan/mongo/boost_1_49_0 bikle611$ 
+Tue Apr 24 15:32 /dan/mongo/boost_1_49_0 bikle611$ 
+
+
+I added BOOST_ROOT to my environment:
+
+export BOOST_ROOT=/dan/mongo/boost_1_49_0
+
+Next, I looked for the file which Mongo wanted:
+
+
+Tue Apr 24 15:41 /dan/mongo bikle611$ 
+Tue Apr 24 15:41 /dan/mongo bikle611$ find . -name operations.hpp -print
+./boost_1_49_0/boost/filesystem/operations.hpp
+./boost_1_49_0/boost/filesystem/v2/operations.hpp
+./boost_1_49_0/boost/filesystem/v3/operations.hpp
+./boost_1_49_0/boost/iostreams/operations.hpp
+./boost_1_49_0/boost/mpi/operations.hpp
+./boost_1_49_0/boost/numeric/ublas/operations.hpp
+Tue Apr 24 15:42 /dan/mongo bikle611$ 
+Tue Apr 24 15:42 /dan/mongo bikle611$ 
+Tue Apr 24 15:42 /dan/mongo bikle611$ 
+
+
+Then, 
