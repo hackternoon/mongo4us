@@ -1066,4 +1066,65 @@ Thu Apr 26 18:13 /dan/mongo/boost_1_49_0 bikle611$
 Next, I did this:
 
 
-scons --prefix=/dan/mongo --extrapathdyn /dan/mongo .
+Thu Apr 26 17:15 /dan/mongo/boost_1_49_0 bikle611$ 
+Thu Apr 26 18:13 /dan/mongo/boost_1_49_0 bikle611$ 
+Thu Apr 26 18:13 /dan/mongo/boost_1_49_0 bikle611$ 
+Thu Apr 26 18:18 /dan/mongo/boost_1_49_0 bikle611$ cd ..
+Thu Apr 26 18:18 /dan/mongo bikle611$ 
+Thu Apr 26 18:18 /dan/mongo bikle611$ ll
+total 121384
+drwxr-xr-x  11 bikle611  admin       374 Apr 26 17:11 ./
+drwxr-xr-x   5 bikle611  admin       170 Apr 24 14:40 ../
+drwxr-xr-x  25 bikle611  admin       850 Apr 26 17:07 boost_1_49_0/
+-rw-r--r--   1 bikle611  admin  59136116 Feb 24 03:57 boost_1_49_0.tar.gz
+-rwxr-xr-x   1 bikle611  admin     34364 Apr 24 15:49 example*
+-rw-r--r--   1 bikle611  admin       270 Apr 24 15:46 example.cpp
+drwxr-xr-x   3 bikle611  admin       102 Apr 26 17:11 include/
+drwxr-xr-x   5 bikle611  admin       170 Apr 26 16:44 junk/
+drwxr-xr-x  12 bikle611  admin       408 Apr 26 17:15 lib/
+drwxr-xr-x  39 bikle611  admin      1326 Apr 26 16:57 mongodb-src-r2.0.4/
+-rw-r--r--   1 bikle611  admin   2966431 Mar 19 20:44 mongodb-src-r2.0.4.tar.gz
+Thu Apr 26 18:18 /dan/mongo bikle611$ 
+Thu Apr 26 18:19 /dan/mongo bikle611$ 
+Thu Apr 26 18:19 /dan/mongo bikle611$ 
+Thu Apr 26 18:19 /dan/mongo bikle611$ cd mongodb-src-r2.0.4
+Thu Apr 26 18:19 /dan/mongo/mongodb-src-r2.0.4 bikle611$ 
+Thu Apr 26 18:19 /dan/mongo/mongodb-src-r2.0.4 bikle611$ 
+Thu Apr 26 18:19 /dan/mongo/mongodb-src-r2.0.4 bikle611$ scons --prefix=/dan/mongo --extrapathdyn /dan/mongo .
+scons: Reading SConscript files ...
+scons version: 2.1.0
+python version: 2 6 2 'final' 0
+Checking whether the C++ compiler worksyes
+Checking for C library stdc++... yes
+Checking for C++ header file boost/filesystem/operations.hpp... yes
+Checking for C library boost_system-mt... no
+Checking for C library boost_system... yes
+Checking for C library boost_thread-mt... no
+Checking for C library boost_thread... yes
+Checking for C library boost_filesystem-mt... no
+Checking for C library boost_filesystem... yes
+Checking for C library boost_program_options-mt... no
+Checking for C library boost_program_options... yes
+Checking for C++ header file execinfo.h... yes
+Checking for C library pcap... yes
+Checking whether the C++ compiler worksyes
+Checking for C++ header file boost/filesystem/operations.hpp... yes
+Checking for C library boost_system-mt... no
+Checking for C library boost_system... yes
+Checking for C library boost_thread-mt... no
+Checking for C library boost_thread... yes
+Checking for C library boost_filesystem-mt... no
+Checking for C library boost_filesystem... yes
+Checking for C library boost_program_options-mt... no
+Checking for C library boost_program_options... yes
+Checking for C++ header file execinfo.h... yes
+Checking for C library pcap... yes
+scons: done reading SConscript files.
+scons: Building targets ...
+g++ -o pch.o -c -Wnon-virtual-dtor -fPIC -fno-strict-aliasing -ggdb -pthread -Wall -Wsign-compare -Wno-unknown-pragmas -Winvalid-pch -O3 -D_SCONS -DMONGO_EXPOSE_MACROS -D_FILE_OFFSET_BITS=64 -DXP_UNIX -Ithird_party/js-1.7 -Ithird_party/pcre-7.4 -I. -I/dan/mongo/include -I/opt/local/include pch.cpp
+/dan/mongo/include/boost/thread/detail/thread.hpp:316: warning: type attributes are honored only at type definition
+
+
+snip ...
+
+
