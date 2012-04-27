@@ -1147,3 +1147,153 @@ Thu Apr 26 18:53 /dan/mongo/mongodb-src-r2.0.4 bikle611$
 Thu Apr 26 18:53 /dan/mongo/mongodb-src-r2.0.4 bikle611$ 
 
 
+Next, I looked at this URL:
+
+http://www.mongodb.org/display/DOCS/Tutorial
+
+It described an executable file named "mongo" under a bin directory.
+
+I looked for it and found it where I expected it to be relative to /dan/mongo/ which was the prefix directory I specified when I built MongoDB:
+
+
+Thu Apr 26 21:26 /dan/mongo/mongodb-src-r2.0.4 bikle611$ 
+Thu Apr 26 21:26 /dan/mongo/mongodb-src-r2.0.4 bikle611$ 
+Thu Apr 26 21:26 /dan/mongo/mongodb-src-r2.0.4 bikle611$ cd /dan/mongo/
+Thu Apr 26 21:34 /dan/mongo bikle611$ 
+Thu Apr 26 21:34 /dan/mongo bikle611$ ll
+total 121384
+drwxr-xr-x  12 bikle611  admin       408 Apr 26 18:38 ./
+drwxr-xr-x   5 bikle611  admin       170 Apr 24 14:40 ../
+drwxr-xr-x  14 bikle611  admin       476 Apr 26 18:44 bin/
+drwxr-xr-x  25 bikle611  admin       850 Apr 26 17:07 boost_1_49_0/
+-rw-r--r--   1 bikle611  admin  59136116 Feb 24 03:57 boost_1_49_0.tar.gz
+-rwxr-xr-x   1 bikle611  admin     34364 Apr 24 15:49 example*
+-rw-r--r--   1 bikle611  admin       270 Apr 24 15:46 example.cpp
+drwxr-xr-x   3 bikle611  admin       102 Apr 26 17:11 include/
+drwxr-xr-x   5 bikle611  admin       170 Apr 26 16:44 junk/
+drwxr-xr-x  12 bikle611  admin       408 Apr 26 17:15 lib/
+drwxr-xr-x  67 bikle611  admin      2278 Apr 26 18:53 mongodb-src-r2.0.4/
+-rw-r--r--   1 bikle611  admin   2966431 Mar 19 20:44 mongodb-src-r2.0.4.tar.gz
+Thu Apr 26 21:34 /dan/mongo bikle611$ 
+Thu Apr 26 21:34 /dan/mongo bikle611$ 
+Thu Apr 26 21:34 /dan/mongo bikle611$ ll bin/mongo
+-rwxr-xr-x  1 bikle611  admin  3363632 Apr 26 18:39 bin/mongo*
+Thu Apr 26 21:34 /dan/mongo bikle611$ 
+Thu Apr 26 21:34 /dan/mongo bikle611$ 
+Thu Apr 26 21:34 /dan/mongo bikle611$ 
+
+
+I tried running it:
+
+
+Thu Apr 26 21:34 /dan/mongo bikle611$ 
+Thu Apr 26 21:34 /dan/mongo bikle611$ 
+Thu Apr 26 21:34 /dan/mongo bikle611$ bin/mongo
+dyld: Library not loaded: libboost_system.dylib
+  Referenced from: /dan/mongo/bin/mongo
+  Reason: image not found
+Trace/BPT trap
+Thu Apr 26 21:37 /dan/mongo bikle611$ 
+Thu Apr 26 21:37 /dan/mongo bikle611$ 
+Thu Apr 26 21:37 /dan/mongo bikle611$ 
+
+
+Thu Apr 26 21:39 /dan/mongo bikle611$ 
+Thu Apr 26 21:39 /dan/mongo bikle611$ find . -type f -print | grep libboost_system
+./boost_1_49_0/bin.v2/libs/system/build/darwin-4.0.1/release/link-static/threading-multi/libboost_system.a
+./boost_1_49_0/bin.v2/libs/system/build/darwin-4.0.1/release/threading-multi/libboost_system.dylib
+./lib/libboost_system.a
+./lib/libboost_system.dylib
+Thu Apr 26 21:39 /dan/mongo bikle611$ 
+Thu Apr 26 21:40 /dan/mongo bikle611$ 
+Thu Apr 26 21:40 /dan/mongo bikle611$ 
+
+I tried using LD_LIBRARY_PATH:
+
+
+Thu Apr 26 21:40 /dan/mongo bikle611$ 
+Thu Apr 26 21:40 /dan/mongo bikle611$ export LD_LIBRARY_PATH=/dan/mongo/lib
+Thu Apr 26 21:41 /dan/mongo bikle611$ 
+Thu Apr 26 21:41 /dan/mongo bikle611$ bin/mongo
+dyld: Library not loaded: libboost_system.dylib
+  Referenced from: /dan/mongo/bin/mongo
+  Reason: image not found
+Trace/BPT trap
+Thu Apr 26 21:41 /dan/mongo bikle611$ 
+Thu Apr 26 21:41 /dan/mongo bikle611$ 
+Thu Apr 26 21:41 /dan/mongo bikle611$ 
+
+I looked at the dylib files which the find-command had found:
+
+
+Thu Apr 26 21:41 /dan/mongo bikle611$ 
+Thu Apr 26 21:41 /dan/mongo bikle611$ find . -type f -name libboost_system.dylib |xargs ls -la
+-rwxr-xr-x  1 bikle611  admin  29884 Apr 26 17:11 ./boost_1_49_0/bin.v2/libs/system/build/darwin-4.0.1/release/threading-multi/libboost_system.dylib
+-rwxr-xr-x  1 bikle611  admin  29884 Apr 26 17:11 ./lib/libboost_system.dylib
+Thu Apr 26 21:44 /dan/mongo bikle611$ 
+Thu Apr 26 21:44 /dan/mongo bikle611$ 
+
+Okay so I see that they are in my filesystem and they don't look very strange.
+
+I did some google searches and found an interesting document:
+
+http://qin.laya.com/tech_coding_help/dylib_linking.html
+
+I tried "otool":
+
+
+Thu Apr 26 21:46 /dan/mongo bikle611$ 
+Thu Apr 26 21:46 /dan/mongo bikle611$ 
+Thu Apr 26 21:46 /dan/mongo bikle611$ otool -L bin/mongo
+bin/mongo:
+	/usr/lib/libstdc++.6.dylib (compatibility version 7.0.0, current version 7.4.0)
+	libboost_system.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_thread.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_filesystem.dylib (compatibility version 0.0.0, current version 0.0.0)
+	libboost_program_options.dylib (compatibility version 0.0.0, current version 0.0.0)
+	/usr/lib/libgcc_s.1.dylib (compatibility version 1.0.0, current version 1.0.0)
+	/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 111.1.7)
+Thu Apr 26 21:59 /dan/mongo bikle611$ 
+Thu Apr 26 21:59 /dan/mongo bikle611$ 
+Thu Apr 26 21:59 /dan/mongo bikle611$ 
+Thu Apr 26 21:59 /dan/mongo bikle611$ 
+
+According to the above document, and the above otool output, it seems plausible that bin/mongo is looking for the libboost_*.dylib files in the bin/ directory.
+
+So, as an experiment, I copied the libboost_*.dylib files into the bin/ directory:
+
+
+Thu Apr 26 21:59 /dan/mongo bikle611$ 
+Thu Apr 26 21:59 /dan/mongo bikle611$ ls -la lib/libboost_*dylib
+-rwxr-xr-x  1 bikle611  admin   92692 Apr 26 17:11 lib/libboost_date_time.dylib*
+-rwxr-xr-x  1 bikle611  admin  193704 Apr 26 17:11 lib/libboost_filesystem.dylib*
+-rwxr-xr-x  1 bikle611  admin  462868 Apr 26 17:11 lib/libboost_program_options.dylib*
+-rwxr-xr-x  1 bikle611  admin   29884 Apr 26 17:11 lib/libboost_system.dylib*
+-rwxr-xr-x  1 bikle611  admin  150908 Apr 26 17:11 lib/libboost_thread.dylib*
+Thu Apr 26 22:06 /dan/mongo bikle611$ 
+Thu Apr 26 22:06 /dan/mongo bikle611$ 
+Thu Apr 26 22:06 /dan/mongo bikle611$ cp -p lib/libboost_*dylib  bin/
+Thu Apr 26 22:07 /dan/mongo bikle611$ 
+Thu Apr 26 22:07 /dan/mongo bikle611$ 
+Thu Apr 26 22:07 /dan/mongo bikle611$ 
+
+
+Then, I tried bin/mongo again:
+
+
+Thu Apr 26 22:07 /dan/mongo bikle611$ 
+Thu Apr 26 22:07 /dan/mongo bikle611$ 
+Thu Apr 26 22:07 /dan/mongo bikle611$ bin/mongo
+dyld: Library not loaded: libboost_system.dylib
+  Referenced from: /dan/mongo/bin/mongo
+  Reason: image not found
+Trace/BPT trap
+Thu Apr 26 22:09 /dan/mongo bikle611$ 
+Thu Apr 26 22:09 /dan/mongo bikle611$ 
+Thu Apr 26 22:09 /dan/mongo bikle611$ 
+
+At this point I felt that installing MongoDB from source on my Mac was too much effort.
+
+I was ready to knuckle under and use Homebrew.
+
+
